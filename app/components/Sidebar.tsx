@@ -6,7 +6,7 @@ export default function Sidebar() {
   const { active, setActive } = useNav()
 
   return (
-    <aside className="fixed top-16 left-0 h-[calc(100vh-4rem)] w-[220px] border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 flex flex-col py-4 px-5">
+    <aside className="fixed top-16 left-0 h-[calc(100vh-4rem)] w-[220px] border-r border-gray-100 dark:border-white/10 bg-white dark:bg-gray-950 flex flex-col py-4 px-5">
       <p className="font-semibold text-gray-900 dark:text-white text-lg mb-4 px-2">
         Sections
       </p>
