@@ -57,17 +57,17 @@ export default function Header() {
               href="https://www.linkedin.com/in/muskan-pandey-36661a220/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+              className="flex items-center gap-1 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
-              LinkedIn
+              LinkedIn <Icon icon="lucide:external-link" width="12" height="12" />
             </a>
             <a
-              href="/resume.pdf"
+              href="https://drive.google.com/file/d/1hhTpk7y-JV0ukpKKhb1nGqw_VEDs6mub/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+              className="flex items-center gap-1 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
-              Resume
+              Resume <Icon icon="lucide:external-link" width="12" height="12" />
             </a>
           </nav>
         </div>
