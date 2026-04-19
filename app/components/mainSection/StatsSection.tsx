@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Icon } from '@iconify/react'
+import GitHubContributions from './GitHubContributions'
 
 
 const recommendations = [
@@ -158,18 +159,13 @@ export default function StatsSection() {
       </div>
 
       {/* ── GitHub Contributions ── */}
-      <div className="mb-12">
+      {/* <div className="mb-12">
         <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">GitHub Activity</h3>
         <p className="text-xs text-gray-400 dark:text-gray-500 mb-6">Contribution history.</p>
-        <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/40 p-5 overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://ghchart.rshah.org/7c3aed/pandey03muskan"
-            alt="Muskan Pandey GitHub contribution chart"
-            className="w-full"
-          />
+        <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/40 p-5">
+          <GitHubContributions />
         </div>
-      </div>
+      </div> */}
 
       {/* ── Currently ── */}
       <div>
