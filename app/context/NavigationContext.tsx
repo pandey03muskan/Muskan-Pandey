@@ -4,7 +4,7 @@ import { createContext, useContext, useState, ReactNode } from 'react'
 
 export const SECTIONS = [
   { label: 'Introduction', id: 'introduction' },
-  { label: 'About Me', id: 'about-me' },
+  // { label: 'About Me', id: 'about-me' },
   { label: 'Projects', id: 'projects' },
   { label: 'Skills & Tools', id: 'skills-and-tools' },
   { label: 'Experience', id: 'experience' },

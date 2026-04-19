@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
+import Footer from "./components/Footer";
 import { NavigationProvider } from "./context/NavigationContext";
 
 export const metadata: Metadata = {
-  title: "Muskan Pandey | Frontend Engineer",
+  title: "Muskan Pandey | Software Development Engineer",
   description: "Software Engineer | Next.js | React.js | MUI | Golang | Building scalable web apps and developer tools",
 };
 
@@ -23,6 +24,7 @@ export default function RootLayout({
           <main className="flex-1" style={{ marginLeft: '220px', marginTop: '4rem' }}>
             {children}
           </main>
+          <Footer />
         </NavigationProvider>
       </body>
     </html>

@@ -39,7 +39,7 @@ export default function Home() {
       </div>
 
       {/* Bottom navigation */}
-      <div className="flex items-center justify-between px-12 py-6 border-t border-gray-100 dark:border-gray-800">
+      <div className="flex items-center justify-between px-12 py-6">
         <button
           onClick={goPrev}
           className={`flex items-center gap-2 text-sm font-medium transition-all duration-200
