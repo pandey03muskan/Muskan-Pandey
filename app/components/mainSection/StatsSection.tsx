@@ -4,13 +4,20 @@ import { useState, useEffect } from 'react'
 import { Icon } from '@iconify/react'
 
 
-// Replace with your actual LinkedIn recommendations
 const recommendations = [
   {
-    name: 'Recommender Name',
-    role: 'Role · Company',
-    initials: 'RN',
-    text: 'Add your LinkedIn recommendation text here. This will appear in the carousel.',
+    name: 'Lalit Rawat',
+    role: 'Senior Backend & Platform Engineer · Initializ Labs',
+    initials: 'LR',
+    date: 'January 10, 2026',
+    text: 'I had the opportunity to work with Muskan and was consistently impressed by her speed and efficiency. She is highly reliable and completes assigned tasks well within timelines without compromising on quality. Muskan works on React and modern frontend technologies, and she has a strong understanding of the requirements and the overall flow of the work. She is quick to grasp new features, implements them effectively, and ensures a smooth user experience. Her efficiency, clarity of thought, and commitment to delivering results make her a great asset to any team. I would strongly recommend Muskan for any frontend-focused role.',
+  },
+  {
+    name: 'Ratnesh Maurya',
+    role: 'Backend Engineer · Golang · Elixir · Fintech',
+    initials: 'RM',
+    date: 'February 2, 2026',
+    text: "I've had the pleasure of working closely with Muskan and can confidently say she is a strong and dependable frontend developer. She has solid hands-on experience with Next.js and Material UI (MUI) and consistently delivers clean, well-structured, and user-friendly interfaces. Beyond frontend development, Muskan also has experience working with Golang, where she contributed to backend and CLI-related tasks, showing her versatility as an engineer. What stands out most is her ability to quickly understand requirements, collaborate effectively across teams, and take ownership of her work. I highly recommend Muskan to any team looking for a skilled, reliable, and well-rounded developer.",
   },
 ]
 
@@ -127,6 +134,7 @@ export default function StatsSection() {
               <div>
                 <p className="text-sm font-semibold text-gray-900 dark:text-white">{rec.name}</p>
                 <p className="text-xs text-gray-400 dark:text-gray-500">{rec.role}</p>
+                <p className="text-xs text-gray-300 dark:text-gray-600">{rec.date}</p>
               </div>
             </div>
 
