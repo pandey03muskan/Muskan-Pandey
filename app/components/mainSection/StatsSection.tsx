@@ -3,21 +3,27 @@
 import { useState, useEffect } from 'react'
 import { Icon } from '@iconify/react'
 
-const BASE_APPRECIATIONS = 794
 
-// Replace with your actual LinkedIn recommendations
 const recommendations = [
   {
-    name: 'Recommender Name',
-    role: 'Role · Company',
-    initials: 'RN',
-    text: 'Add your LinkedIn recommendation text here. This will appear in the carousel.',
+    name: 'Lalit Rawat',
+    role: 'Senior Backend & Platform Engineer · Initializ Labs',
+    initials: 'LR',
+    date: 'January 10, 2026',
+    text: 'I had the opportunity to work with Muskan and was consistently impressed by her speed and efficiency. She is highly reliable and completes assigned tasks well within timelines without compromising on quality. Muskan works on React and modern frontend technologies, and she has a strong understanding of the requirements and the overall flow of the work. She is quick to grasp new features, implements them effectively, and ensures a smooth user experience. Her efficiency, clarity of thought, and commitment to delivering results make her a great asset to any team. I would strongly recommend Muskan for any frontend-focused role.',
+  },
+  {
+    name: 'Ratnesh Maurya',
+    role: 'Backend Engineer · Golang · Elixir · Fintech',
+    initials: 'RM',
+    date: 'February 2, 2026',
+    text: "I've had the pleasure of working closely with Muskan and can confidently say she is a strong and dependable frontend developer. She has solid hands-on experience with Next.js and Material UI (MUI) and consistently delivers clean, well-structured, and user-friendly interfaces. Beyond frontend development, Muskan also has experience working with Golang, where she contributed to backend and CLI-related tasks, showing her versatility as an engineer. What stands out most is her ability to quickly understand requirements, collaborate effectively across teams, and take ownership of her work. I highly recommend Muskan to any team looking for a skilled, reliable, and well-rounded developer.",
   },
 ]
 
 export default function StatsSection() {
   const [appreciated, setAppreciated] = useState(false)
-  const [appreciationCount, setAppreciationCount] = useState(BASE_APPRECIATIONS)
+  const [appreciationCount, setAppreciationCount] = useState<number | null>(null)
   const [views, setViews] = useState<number | null>(null)
   const [recIndex, setRecIndex] = useState(0)
 
@@ -34,14 +40,22 @@ export default function StatsSection() {
       if (!alreadyVisited) localStorage.setItem('portfolio-visited', 'true')
     }
 
+    const fetchAppreciations = async () => {
+      const res = await fetch('/api/appreciate')
+      const data = await res.json()
+      setAppreciationCount(data.count ?? 0)
+    }
+
     fetchViews()
+    fetchAppreciations()
   }, [])
 
-  const handleAppreciate = () => {
+  const handleAppreciate = async () => {
     if (!appreciated) {
       setAppreciated(true)
-      setAppreciationCount((c) => c + 1)
+      setAppreciationCount((prev) => (prev ?? 0) + 1)
       localStorage.setItem('portfolio-appreciated', 'true')
+      fetch('/api/appreciate', { method: 'POST' })
     }
   }
 
@@ -58,7 +72,7 @@ export default function StatsSection() {
       <p className="text-sm text-gray-400 dark:text-gray-500 mb-10">By the numbers.</p>
 
       {/* ── Stat Cards ── */}
-      <div className="grid grid-cols-2 gap-4 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
 
         {/* Total Views */}
         <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/40 p-6">
@@ -69,7 +83,7 @@ export default function StatsSection() {
           <p className="text-5xl font-bold text-purple-600 dark:text-purple-400 mb-3">
             {views !== null ? views.toLocaleString() : 'Loading...'}
           </p>
-          <p className="text-xs text-gray-400 dark:text-gray-500">Unique page visits since Oct-2025</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500">Unique page visits since April-2026</p>
         </div>
 
         {/* Appreciation */}
@@ -79,20 +93,20 @@ export default function StatsSection() {
             <span className="text-sm font-semibold">Appreciation Count</span>
           </div>
           <p className="text-5xl font-bold text-pink-500 mb-4">
-            {appreciationCount.toLocaleString()}
+            {appreciationCount !== null ? appreciationCount.toLocaleString() : 'Loading...'}
           </p>
-          <button
-            onClick={handleAppreciate}
-            disabled={appreciated}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium transition-all
-              ${appreciated
-                ? 'bg-gray-800 dark:bg-gray-700 text-gray-400 cursor-default'
-                : 'bg-gray-900 dark:bg-gray-800 text-white hover:bg-gray-700 dark:hover:bg-gray-700 cursor-pointer'
-              }`}
-          >
-            <span>❤️</span>
-            {appreciated ? 'Much appreciated!' : 'Thank you, much appreciated!'}
-          </button>
+          {appreciated ? (
+            <p className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
+              <span>❤️</span> Much appreciated!
+            </p>
+          ) : (
+            <button
+              onClick={handleAppreciate}
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-900 dark:bg-gray-800 text-white text-xs font-medium hover:bg-gray-700 dark:hover:bg-gray-700 transition-all cursor-pointer"
+            >
+              <span>❤️</span> Love this portfolio
+            </button>
+          )}
         </div>
 
       </div>
@@ -118,6 +132,7 @@ export default function StatsSection() {
               <div>
                 <p className="text-sm font-semibold text-gray-900 dark:text-white">{rec.name}</p>
                 <p className="text-xs text-gray-400 dark:text-gray-500">{rec.role}</p>
+                <p className="text-xs text-gray-300 dark:text-gray-600">{rec.date}</p>
               </div>
             </div>
 

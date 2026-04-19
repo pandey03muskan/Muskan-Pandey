@@ -19,12 +19,16 @@ type NavContextType = {
   goNext: () => void
   goPrev: () => void
   currentIndex: number
+  mobileMenuOpen: boolean
+  toggleMobileMenu: () => void
+  closeMobileMenu: () => void
 }
 
 const NavContext = createContext<NavContextType | null>(null)
 
 export function NavigationProvider({ children }: { children: ReactNode }) {
   const [active, setActive] = useState('introduction')
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const currentIndex = SECTIONS.findIndex((s) => s.id === active)
 
   const goNext = () => {
@@ -35,8 +39,11 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
     if (currentIndex > 0) setActive(SECTIONS[currentIndex - 1].id)
   }
 
+  const toggleMobileMenu = () => setMobileMenuOpen((v) => !v)
+  const closeMobileMenu = () => setMobileMenuOpen(false)
+
   return (
-    <NavContext.Provider value={{ active, setActive, goNext, goPrev, currentIndex }}>
+    <NavContext.Provider value={{ active, setActive, goNext, goPrev, currentIndex, mobileMenuOpen, toggleMobileMenu, closeMobileMenu }}>
       {children}
     </NavContext.Provider>
   )

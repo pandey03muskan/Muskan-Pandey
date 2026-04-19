@@ -23,7 +23,7 @@ export default function RootLayout({
           <ViewTracker />
           <Header />
           <Sidebar />
-          <main className="flex-1" style={{ marginLeft: '220px', marginTop: '4rem' }}>
+          <main className="flex-1 mt-16 md:ml-[220px]">
             {children}
           </main>
           <Footer />

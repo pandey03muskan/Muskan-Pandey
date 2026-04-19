@@ -3,9 +3,11 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Icon } from '@iconify/react'
+import { useNav } from '../context/NavigationContext'
 
 export default function Header() {
   const [dark, setDark] = useState(false)
+  const { toggleMobileMenu } = useNav()
 
   useEffect(() => {
     const saved = localStorage.getItem('theme')
@@ -29,14 +31,25 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/10 dark:bg-black/20 border-b border-white/20 dark:border-white/10">
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 2rem', height: '4rem' }}>
+      <div className="flex items-center justify-between px-4 md:px-8 h-16">
 
-        {/* LEFT: Name + Nav */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <Link href="/" className="font-bold text-xl text-gray-900 dark:text-white tracking-tight">
+        {/* LEFT */}
+        <div className="flex items-center gap-3 md:gap-8">
+          {/* Hamburger — mobile only */}
+          <button
+            onClick={toggleMobileMenu}
+            className="md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300 cursor-pointer"
+            aria-label="Open menu"
+          >
+            <Icon icon="lucide:menu" width="20" height="20" />
+          </button>
+
+          <Link href="/" className="font-bold text-lg md:text-xl text-gray-900 dark:text-white tracking-tight">
             Muskan Pandey
           </Link>
-          <nav style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+
+          {/* Nav links — desktop only */}
+          <nav className="hidden md:flex items-center gap-6">
             <Link href="/" className="font-medium text-sm text-gray-900 dark:text-white border-b-2 border-gray-900 dark:border-white pb-0.5">
               Home
             </Link>
@@ -59,20 +72,15 @@ export default function Header() {
           </nav>
         </div>
 
-        {/* RIGHT: Toggle + GitHub */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        {/* RIGHT */}
+        <div className="flex items-center gap-1">
           <button
             onClick={toggleDark}
             className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300 cursor-pointer"
             aria-label="Toggle dark mode"
           >
-            {dark ? (
-              <Icon icon="lucide:sun" width="18" height="18" />
-            ) : (
-              <Icon icon="lucide:moon" width="18" height="18" />
-            )}
+            {dark ? <Icon icon="lucide:sun" width="18" height="18" /> : <Icon icon="lucide:moon" width="18" height="18" />}
           </button>
-
           <a
             href="https://github.com/pandey03muskan"
             target="_blank"
