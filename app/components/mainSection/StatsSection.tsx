@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { Icon } from '@iconify/react'
 
-const BASE_VIEWS = 1946
 const BASE_APPRECIATIONS = 794
 
 // Replace with your actual LinkedIn recommendations
@@ -19,12 +18,24 @@ const recommendations = [
 export default function StatsSection() {
   const [appreciated, setAppreciated] = useState(false)
   const [appreciationCount, setAppreciationCount] = useState(BASE_APPRECIATIONS)
+  const [views, setViews] = useState<number | null>(null)
   const [recIndex, setRecIndex] = useState(0)
 
   useEffect(() => {
     if (localStorage.getItem('portfolio-appreciated') === 'true') {
       setAppreciated(true)
     }
+
+    const fetchViews = async () => {
+      const alreadyVisited = localStorage.getItem('portfolio-visited') === 'true'
+      const method = alreadyVisited ? 'GET' : 'POST'
+      const res = await fetch('/api/views', { method })
+      const data = await res.json()
+      setViews(data.count)
+      if (!alreadyVisited) localStorage.setItem('portfolio-visited', 'true')
+    }
+
+    fetchViews()
   }, [])
 
   const handleAppreciate = () => {
@@ -57,7 +68,7 @@ export default function StatsSection() {
             <span className="text-sm font-semibold">Total Views</span>
           </div>
           <p className="text-5xl font-bold text-purple-600 dark:text-purple-400 mb-3">
-            {BASE_VIEWS.toLocaleString()}
+            {views !== null ? views.toLocaleString() : '—'}
           </p>
           <p className="text-xs text-gray-400 dark:text-gray-500">Unique page visits since Oct-2025</p>
         </div>
