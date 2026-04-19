@@ -27,11 +27,12 @@ export default function StatsSection() {
     }
 
     const fetchViews = async () => {
+      const BASE = 'https://api.counterapi.dev/v2/first-counter-3801'
       const alreadyVisited = localStorage.getItem('portfolio-visited') === 'true'
-      const method = alreadyVisited ? 'GET' : 'POST'
-      const res = await fetch('/api/views', { method })
+      const url = alreadyVisited ? `${BASE}/` : `${BASE}/up`
+      const res = await fetch(url, { cache: 'no-store' })
       const data = await res.json()
-      setViews(data.count)
+      setViews(data.count ?? 0)
       if (!alreadyVisited) localStorage.setItem('portfolio-visited', 'true')
     }
 
@@ -68,7 +69,7 @@ export default function StatsSection() {
             <span className="text-sm font-semibold">Total Views</span>
           </div>
           <p className="text-5xl font-bold text-purple-600 dark:text-purple-400 mb-3">
-            {views !== null ? views.toLocaleString() : '—'}
+            {views !== null ? views.toLocaleString() : 'Loading...'}
           </p>
           <p className="text-xs text-gray-400 dark:text-gray-500">Unique page visits since Oct-2025</p>
         </div>
