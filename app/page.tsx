@@ -34,12 +34,12 @@ export default function Home() {
     <div className="relative flex flex-col" style={{ minHeight: 'calc(100vh - 4rem)' }}>
 
       {/* Section content */}
-      <div key={active} className="flex-1 px-12 py-16 section-fade">
+      <div key={active} className="flex-1 px-4 py-8 md:px-12 md:py-16 section-fade">
         <SectionContent />
       </div>
 
       {/* Bottom navigation */}
-      <div className="flex items-center justify-between px-12 py-6">
+      <div className="flex items-center justify-between px-4 py-4 md:px-12 md:py-6">
         <button
           onClick={goPrev}
           className={`flex items-center gap-2 text-sm font-medium transition-all duration-200

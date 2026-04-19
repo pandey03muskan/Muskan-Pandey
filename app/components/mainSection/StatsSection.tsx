@@ -72,7 +72,7 @@ export default function StatsSection() {
       <p className="text-sm text-gray-400 dark:text-gray-500 mb-10">By the numbers.</p>
 
       {/* ── Stat Cards ── */}
-      <div className="grid grid-cols-2 gap-4 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
 
         {/* Total Views */}
         <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/40 p-6">

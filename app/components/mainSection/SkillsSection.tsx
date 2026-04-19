@@ -31,8 +31,8 @@ export default function SkillsSection() {
 
       <div className="flex flex-col divide-y divide-gray-100 dark:divide-gray-800">
         {skills.map(({ category, items }) => (
-          <div key={category} className="flex gap-8 py-3 items-start">
-            <span className="w-44 shrink-0 text-xs font-medium uppercase tracking-widest text-gray-400 dark:text-gray-500 pt-1">
+          <div key={category} className="flex flex-col md:flex-row gap-2 md:gap-8 py-3 items-start">
+            <span className="w-full md:w-44 shrink-0 text-xs font-medium uppercase tracking-widest text-gray-400 dark:text-gray-500 md:pt-1">
               {category}
             </span>
             <div className="flex flex-wrap gap-2">

@@ -44,7 +44,7 @@ export default function ProjectDetail({ project, onBack }: Props) {
 
       {/* Features & Challenges */}
       {hasFeatureOrChallenge && (
-        <div className="grid grid-cols-2 gap-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
           {(project.features?.length ?? 0) > 0 && (
             <div>
               <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-3">Features</h3>
@@ -71,7 +71,7 @@ export default function ProjectDetail({ project, onBack }: Props) {
 
       {/* Learnings & Links */}
       {hasLearningOrLinks && (
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {(project.learnings?.length ?? 0) > 0 && (
             <div>
               <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-3">Learnings</h3>
