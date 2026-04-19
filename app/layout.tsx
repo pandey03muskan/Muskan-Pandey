@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
+import ViewTracker from "./components/ViewTracker";
 import { NavigationProvider } from "./context/NavigationContext";
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-full flex flex-col bg-white dark:bg-gray-950 text-gray-900 dark:text-white transition-colors">
         <NavigationProvider>
+          <ViewTracker />
           <Header />
           <Sidebar />
           <main className="flex-1" style={{ marginLeft: '220px', marginTop: '4rem' }}>
