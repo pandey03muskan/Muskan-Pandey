@@ -27,10 +27,8 @@ export default function StatsSection() {
     }
 
     const fetchViews = async () => {
-      const BASE = 'https://api.counterapi.dev/v2/first-counter-3801'
       const alreadyVisited = localStorage.getItem('portfolio-visited') === 'true'
-      const url = alreadyVisited ? `${BASE}/` : `${BASE}/up`
-      const res = await fetch(url, { cache: 'no-store' })
+      const res = await fetch('/api/views', { method: alreadyVisited ? 'GET' : 'POST' })
       const data = await res.json()
       setViews(data.count ?? 0)
       if (!alreadyVisited) localStorage.setItem('portfolio-visited', 'true')
