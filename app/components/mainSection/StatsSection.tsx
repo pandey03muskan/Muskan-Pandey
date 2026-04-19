@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { Icon } from '@iconify/react'
 
-const BASE_APPRECIATIONS = 794
 
 // Replace with your actual LinkedIn recommendations
 const recommendations = [
@@ -17,7 +16,7 @@ const recommendations = [
 
 export default function StatsSection() {
   const [appreciated, setAppreciated] = useState(false)
-  const [appreciationCount, setAppreciationCount] = useState(BASE_APPRECIATIONS)
+  const [appreciationCount, setAppreciationCount] = useState<number | null>(null)
   const [views, setViews] = useState<number | null>(null)
   const [recIndex, setRecIndex] = useState(0)
 
@@ -34,14 +33,24 @@ export default function StatsSection() {
       if (!alreadyVisited) localStorage.setItem('portfolio-visited', 'true')
     }
 
+    const fetchAppreciations = async () => {
+      const res = await fetch('/api/appreciate')
+      const data = await res.json()
+      setAppreciationCount(data.count ?? 0)
+    }
+
     fetchViews()
+    fetchAppreciations()
   }, [])
 
-  const handleAppreciate = () => {
+  const handleAppreciate = async () => {
     if (!appreciated) {
       setAppreciated(true)
-      setAppreciationCount((c) => c + 1)
       localStorage.setItem('portfolio-appreciated', 'true')
+      await fetch('/api/appreciate', { method: 'POST' })
+      const res = await fetch('/api/appreciate')
+      const data = await res.json()
+      setAppreciationCount(data.count ?? 0)
     }
   }
 
@@ -69,7 +78,7 @@ export default function StatsSection() {
           <p className="text-5xl font-bold text-purple-600 dark:text-purple-400 mb-3">
             {views !== null ? views.toLocaleString() : 'Loading...'}
           </p>
-          <p className="text-xs text-gray-400 dark:text-gray-500">Unique page visits since Oct-2025</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500">Unique page visits since April-2026</p>
         </div>
 
         {/* Appreciation */}
@@ -79,20 +88,20 @@ export default function StatsSection() {
             <span className="text-sm font-semibold">Appreciation Count</span>
           </div>
           <p className="text-5xl font-bold text-pink-500 mb-4">
-            {appreciationCount.toLocaleString()}
+            {appreciationCount !== null ? appreciationCount.toLocaleString() : '—'}
           </p>
-          <button
-            onClick={handleAppreciate}
-            disabled={appreciated}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium transition-all
-              ${appreciated
-                ? 'bg-gray-800 dark:bg-gray-700 text-gray-400 cursor-default'
-                : 'bg-gray-900 dark:bg-gray-800 text-white hover:bg-gray-700 dark:hover:bg-gray-700 cursor-pointer'
-              }`}
-          >
-            <span>❤️</span>
-            {appreciated ? 'Much appreciated!' : 'Thank you, much appreciated!'}
-          </button>
+          {appreciated ? (
+            <p className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
+              <span>❤️</span> Much appreciated!
+            </p>
+          ) : (
+            <button
+              onClick={handleAppreciate}
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-900 dark:bg-gray-800 text-white text-xs font-medium hover:bg-gray-700 dark:hover:bg-gray-700 transition-all cursor-pointer"
+            >
+              <span>❤️</span> Thank you, much appreciated!
+            </button>
+          )}
         </div>
 
       </div>
