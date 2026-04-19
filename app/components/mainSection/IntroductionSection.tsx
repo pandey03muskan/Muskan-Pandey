@@ -24,7 +24,7 @@ function IntroductionSection() {
           className="flex items-center gap-2 px-2 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-xs font-medium transition-colors"
         >
           Get Resume
-          <Icon icon="lucide:arrow-up-right" width="12" height="12" />
+          <Icon icon="lucide:external-link" width="12" height="12" />
         </a>
 
         <a
