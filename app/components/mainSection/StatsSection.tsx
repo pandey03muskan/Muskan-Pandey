@@ -53,11 +53,9 @@ export default function StatsSection() {
   const handleAppreciate = async () => {
     if (!appreciated) {
       setAppreciated(true)
+      setAppreciationCount((prev) => (prev ?? 0) + 1)
       localStorage.setItem('portfolio-appreciated', 'true')
-      await fetch('/api/appreciate', { method: 'POST' })
-      const res = await fetch('/api/appreciate')
-      const data = await res.json()
-      setAppreciationCount(data.count ?? 0)
+      fetch('/api/appreciate', { method: 'POST' })
     }
   }
 
@@ -95,7 +93,7 @@ export default function StatsSection() {
             <span className="text-sm font-semibold">Appreciation Count</span>
           </div>
           <p className="text-5xl font-bold text-pink-500 mb-4">
-            {appreciationCount !== null ? appreciationCount.toLocaleString() : '—'}
+            {appreciationCount !== null ? appreciationCount.toLocaleString() : 'Loading...'}
           </p>
           {appreciated ? (
             <p className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
@@ -106,7 +104,7 @@ export default function StatsSection() {
               onClick={handleAppreciate}
               className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-900 dark:bg-gray-800 text-white text-xs font-medium hover:bg-gray-700 dark:hover:bg-gray-700 transition-all cursor-pointer"
             >
-              <span>❤️</span> Thank you, much appreciated!
+              <span>❤️</span> Love this portfolio
             </button>
           )}
         </div>
