@@ -256,7 +256,6 @@ export const projects: Project[] = [
       'Streaming API consumption and incremental UI updates',
       'Building responsive, data-dense interfaces with Material UI',
     ],
-    codeUrl: 'https://github.com/pandey03muskan',
   },
 
   {
@@ -279,6 +278,5 @@ export const projects: Project[] = [
       'CLI design patterns and command structuring',
       'API integration and token-based authentication handling',
     ],
-    codeUrl: 'https://github.com/pandey03muskan',
   },
 ]
