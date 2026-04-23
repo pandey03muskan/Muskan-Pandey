@@ -3,7 +3,7 @@
 const skills = [
   {
     category: 'Languages',
-    items: ['JavaScript (ES6+)', 'TypeScript', 'Golang'],
+    items: ['JavaScript (ES6+)', 'TypeScript', 'Golang', 'Python'],
   },
   {
     category: 'Frontend',
